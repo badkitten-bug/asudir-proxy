@@ -4,7 +4,7 @@ import { Response, Request } from 'express';
 
 const STRAPI_URL = process.env.STRAPI_URL || 'http://localhost:1337/api';
 
-@Controller()
+@Controller('api')
 export class LecturaPozosController {
   // Crear una nueva lectura
   @Post('lectura-pozos')

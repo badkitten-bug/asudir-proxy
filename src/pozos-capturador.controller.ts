@@ -4,7 +4,7 @@ import { Response } from 'express';
 
 const STRAPI_URL = process.env.STRAPI_URL || 'http://localhost:1337/api';
 
-@Controller()
+@Controller('api')
 export class PozosCapturadorController {
   @Get('pozos-capturador/:userId')
   async getPozos(
