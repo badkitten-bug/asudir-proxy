@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   asudir-proxy:
     build:
@@ -7,29 +5,9 @@ services:
       dockerfile: Dockerfile
     container_name: asudir-proxy
     ports:
-      - "${APP_PORT}:4000"
+      - "${APP_PORT}:3000"
     environment:
-      API_TOKEN_SALT: "${API_TOKEN_SALT}"
-      APP_KEYS: "${APP_KEYS}"
-      DATABASE_CLIENT: "${DATABASE_CLIENT}"
-      DATABASE_HOST: "${DATABASE_HOST}"
-      DATABASE_NAME: "${DATABASE_NAME}"
-      DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
-      DATABASE_PORT: "${DATABASE_PORT}"
-      DATABASE_SSL: "${DATABASE_SSL}"
-      DATABASE_USERNAME: "${DATABASE_USERNAME}"
-      HOST: "${HOST}"
-      JWT_SECRET: "${JWT_SECRET}"
-      APP_PORT: "${APP_PORT}"
-      SMTP_AUTH: "${SMTP_AUTH}"
-      SMTP_FROM: "${SMTP_FROM}"
-      SMTP_HOST: "${SMTP_HOST}"
-      SMTP_PASSWORD: "${SMTP_PASSWORD}"
-      SMTP_PORT: "${SMTP_PORT}"
-      SMTP_REPLY_TO: "${SMTP_REPLY_TO}"
-      SMTP_SECURE: "${SMTP_SECURE}"
-      SMTP_USERNAME: "${SMTP_USERNAME}"
-      TRANSFER_TOKEN_SALT: "${TRANSFER_TOKEN_SALT}"
+      STRAPI_URL: "${STRAPI_URL}"
     restart: on-failure
     volumes:
       - ./:/usr/src/app
