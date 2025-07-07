@@ -4,7 +4,7 @@ import { Response } from 'express';
 
 const STRAPI_URL = process.env.STRAPI_URL || 'http://localhost:1337/api';
 
-@Controller('api/auth')
+@Controller('auth')
 export class AuthController {
   @Post('custom/login')
   async login(@Body() body: any, @Res() res: Response) {
