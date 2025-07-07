@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Headers, Res } from '@nestjs/common';
+import { Controller, Get, Param, Headers, Res, Query } from '@nestjs/common';
 import axios from 'axios';
 import { Response } from 'express';
 
@@ -19,6 +19,28 @@ export class PozosCapturadorController {
       return res.status(response.status).json(response.data);
     } catch (error: any) {
       return res.status(error.response?.status || 500).json(error.response?.data || { error: 'Error al obtener pozos' });
+    }
+  }
+
+  @Get('pozos/:pozoId')
+  async getPozoById(
+    @Param('pozoId') pozoId: string,
+    @Headers('authorization') authorization: string,
+    @Query() query: any,
+    @Res() res: Response
+  ) {
+    try {
+      // Construir la query string manualmente para pasar todos los parámetros (como populate)
+      const queryString = Object.keys(query).length > 0
+        ? '?' + new URLSearchParams(query as any).toString()
+        : '';
+      const url = `${STRAPI_URL}/pozos/${pozoId}${queryString}`;
+      const response = await axios.get(url, {
+        headers: { Authorization: authorization }
+      });
+      return res.status(response.status).json(response.data);
+    } catch (error: any) {
+      return res.status(error.response?.status || 500).json(error.response?.data || { error: 'Error al obtener pozo' });
     }
   }
 }

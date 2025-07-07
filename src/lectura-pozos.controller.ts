@@ -44,4 +44,27 @@ export class LecturaPozosController {
       return res.status(error.response?.status || 500).json(error.response?.data || { error: 'Error al listar lecturas' });
     }
   }
+
+  // Obtener detalle de una lectura
+  @Get('lectura-pozos/:lecturaId')
+  async obtenerLecturaPorId(
+    @Param('lecturaId') lecturaId: string,
+    @Headers('authorization') authorization: string,
+    @Query() query: any,
+    @Res() res: Response
+  ) {
+    try {
+      // Construir la query string manualmente para pasar todos los parámetros (como populate)
+      const queryString = Object.keys(query).length > 0
+        ? '?' + new URLSearchParams(query as any).toString()
+        : '';
+      const url = `${STRAPI_URL}/lectura-pozos/${lecturaId}${queryString}`;
+      const response = await axios.get(url, {
+        headers: { Authorization: authorization }
+      });
+      return res.status(response.status).json(response.data);
+    } catch (error: any) {
+      return res.status(error.response?.status || 500).json(error.response?.data || { error: 'Error al obtener lectura' });
+    }
+  }
 }
