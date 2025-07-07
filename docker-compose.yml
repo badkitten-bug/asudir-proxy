@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  asudir-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: asudir-proxy
+    ports:
+      - "4000:4000"
+    environment:
+      NESTJS_PORT: 4000
+      # Agrega aquí otras variables de entorno necesarias para tu proxy
+    restart: on-failure
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
